@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "strongly-typed",
+  "name": "strongly-typed: a pokemon type chart",
   "icons": [
     {
       "src": "favicon.ico",
