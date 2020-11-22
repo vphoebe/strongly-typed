@@ -1,13 +1,155 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+* {
+  font-family: "Space Mono", monospace;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: rgb(217, 229, 235);
+}
+
+.btn-primary {
+  text-shadow: 2px 2px 6px #111111;
+  background-color: #6890f0;
+  border-color: #587fda;
+}
+
+td.double {
+  background-color: rgb(36, 177, 36);
+}
+
+td.half {
+  background-color: rgb(196, 69, 60);
+}
+
+td.zero {
+  background-color: #2e2c31;
+}
+
+td.empty {
+  background-color: rgb(226, 235, 240);
+}
+
+.table th.corner {
+  background-color: rgb(226, 235, 240);
+  font-size: 0.6rem;
+  padding: 2px !important;
+  vertical-align: middle;
+}
+
+.table td {
+  padding: 0.25rem;
+  color: rgb(255, 239, 204);
+  text-shadow: 2px 2px 6px #111111;
+  text-align: center;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid rgb(191, 197, 211);
+}
+
+.table thead th {
+  border-bottom: 2px solid rgb(191, 197, 211);
+  text-align: center;
+}
+
+.table th.header,
+.table td.header {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 6px #111111;
+}
+
+.table td.header {
+  text-align: left;
+}
+
+.table-container,
+.toolbar-container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.toolbar-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.type-normal {
+  background-color: #a8a878;
+}
+
+.type-fighting {
+  background-color: #c03028;
+}
+
+.type-flying {
+  background-color: #a890f0;
+}
+
+.type-poison {
+  background-color: #a040a0;
+}
+
+.type-ground {
+  background-color: #e0c068;
+}
+
+.type-rock {
+  background-color: #b8a038;
+}
+
+.type-bug {
+  background-color: #a8b820;
+}
+
+.type-ghost {
+  background-color: #705898;
+}
+
+.type-steel {
+  background-color: #b8b8d0;
+}
+
+.type-fire {
+  background-color: #f08030;
+}
+
+.type-water {
+  background-color: #6890f0;
+}
+
+.type-grass {
+  background-color: #78c850;
+}
+
+.type-electric {
+  background-color: #f8d030;
+}
+
+.type-psychic {
+  background-color: #f85888;
+}
+
+.type-ice {
+  background-color: #98d8d8;
+}
+
+.type-dragon {
+  background-color: #7038f8;
+}
+
+.type-dark {
+  background-color: #705848;
+}
+
+.type-fairy {
+  background-color: #ee99ac;
 }
