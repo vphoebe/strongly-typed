@@ -30,6 +30,14 @@ td.empty {
   background-color: rgb(226, 235, 240);
 }
 
+td.quarter {
+  background-color: rgb(58, 27, 25);
+}
+
+td.quad {
+  background-color: rgb(76, 0, 255);
+}
+
 .table th.corner {
   background-color: rgb(226, 235, 240);
   font-size: 0.6rem;
@@ -52,6 +60,7 @@ td.empty {
 .table thead th {
   border-bottom: 2px solid rgb(191, 197, 211);
   text-align: center;
+  vertical-align: middle;
 }
 
 .table th.header,
@@ -63,7 +72,7 @@ td.empty {
 }
 
 .table td.header {
-  text-align: left;
+  text-align: center;
 }
 
 .table-container,

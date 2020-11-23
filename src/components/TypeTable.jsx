@@ -1,40 +1,123 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 
-const generateAttackRows = (currentGen) => {
-  // take currentGen, return an array of <tr> with the appropriate data
-  const typeNames = Object.keys(currentGen);
-  return typeNames.map((name) => {
-    const currentType = currentGen[name];
+const generateAttackRows = (currentTypeset, currentPkmn, currentGen) => {
+  // take currentTypeset, return an array of <tr> with the appropriate data
+  const typeNames = Object.keys(currentTypeset);
+  return typeNames.map((typeName) => {
+    const currentType = currentTypeset[typeName];
     return (
-      <tr key={`a-${name}`}>
-        <td className={`attack header type-${name}`}>{name}</td>
+      <tr key={`a-${typeName}`}>
+        <td className={`attack header type-${typeName}`}>
+          {typeName.toUpperCase().substring(0, 3)}
+        </td>
+        <CurrentPkmnStat
+          currentPkmn={currentPkmn}
+          currentTypeset={currentTypeset}
+          currentGen={currentGen}
+          type={currentType}
+          typeName={typeName}
+        />
         {typeNames.map((secondName) => {
+          let value = 1;
           if (currentType["double_damage_to"].includes(secondName)) {
-            return (
-              <td key={name + secondName} className="double">
-                2
-              </td>
-            );
+            value = 2;
           } else if (currentType["half_damage_to"].includes(secondName)) {
-            return (
-              <td key={name + secondName} className="half">
-                ½
-              </td>
-            );
+            value = 0.5;
           } else if (currentType["no_damage_to"].includes(secondName)) {
-            return (
-              <td key={name + secondName} className="zero">
-                0
-              </td>
-            );
-          } else {
-            return <td key={name + secondName} className="empty"></td>;
+            value = 0;
           }
+          return (
+            <td key={typeName + secondName} className={valueToClassName(value)}>
+              {valueToCellData(value)}
+            </td>
+          );
         })}
       </tr>
     );
   });
+};
+
+const valueToClassName = (value) => {
+  // return className appropriate to value
+  if (value === 0) return "zero";
+  if (value === 1) return "empty";
+  if (value === 2) return "double";
+  if (value === 4) return "quad";
+  if (value === 0.5) return "half";
+  if (value === 0.25) return "quarter";
+};
+
+const valueToCellData = (value) => {
+  if (value === 1) return "";
+  if (value === 0.5) return "½";
+  if (value === 0.25) return "¼";
+  return value;
+};
+
+const CurrentPkmnStat = (props) => {
+  // return one cell based on current type
+  const doubleTypes = props.type.double_damage_to;
+  const halfTypes = props.type.half_damage_to;
+  const noneTypes = props.type.no_damage_to;
+
+  const defenseTypes = props.currentPkmn.types;
+
+  let attackValue1 = 1;
+  let attackValue2 = 1;
+  const isLevitate = props.currentPkmn.abilities.includes("levitate"); // gen 3
+  const isLightningRod = props.currentPkmn.abilities.includes("lightning-rod"); // gen 5
+  const isStormDrain = props.currentPkmn.abilities.includes("storm-drain"); // gen 5
+  const isWonderGuard = props.currentPkmn.abilities.includes("wonder-guard"); // gen 3
+
+  if (doubleTypes.includes(defenseTypes[0])) {
+    attackValue1 = 2;
+  }
+  if (halfTypes.includes(defenseTypes[0])) {
+    attackValue1 = 0.5;
+  }
+  if (noneTypes.includes(defenseTypes[0])) {
+    attackValue1 = 0;
+  }
+
+  if (defenseTypes[1]) {
+    if (doubleTypes.includes(defenseTypes[1])) {
+      attackValue2 = 2;
+    }
+    if (halfTypes.includes(defenseTypes[1])) {
+      attackValue2 = 0.5;
+    }
+    if (noneTypes.includes(defenseTypes[1])) {
+      attackValue2 = 0;
+    }
+  }
+
+  let finalValue = attackValue1 * attackValue2;
+  if (props.typeName === "ground" && props.currentGen >= 3 && isLevitate) {
+    finalValue = 0;
+  }
+
+  if (
+    props.typeName === "electric" &&
+    props.currentGen >= 5 &&
+    isLightningRod
+  ) {
+    finalValue = 0;
+  }
+
+  if (props.typeName === "water" && props.currentGen >= 5 && isStormDrain) {
+    finalValue = 0;
+  }
+
+  if (finalValue < 2 && props.currentGen >= 3 && isWonderGuard) {
+    finalValue = 0;
+  }
+
+  return (
+    <td className={valueToClassName(finalValue)}>
+      {valueToCellData(finalValue)}
+    </td>
+  );
 };
 
 class TypeTable extends React.Component {
@@ -47,7 +130,14 @@ class TypeTable extends React.Component {
               DEFENSE → <br />
               ATTACK ↴
             </th>
-            {Object.keys(this.props.currentGen).map((key) => {
+            <th className="p-0">
+              <img
+                src={this.props.currentPkmn.sprite}
+                alt="test"
+                width="32px"
+              />
+            </th>
+            {Object.keys(this.props.currentTypeset).map((key) => {
               return (
                 <th className={`defense header type-${key}`} key={`d-${key}`}>
                   {key.toUpperCase().substring(0, 3)}
@@ -56,7 +146,13 @@ class TypeTable extends React.Component {
             })}
           </tr>
         </thead>
-        <tbody>{generateAttackRows(this.props.currentGen)}</tbody>
+        <tbody>
+          {generateAttackRows(
+            this.props.currentTypeset,
+            this.props.currentPkmn,
+            this.props.currentGen
+          )}
+        </tbody>
       </Table>
     );
   }
