@@ -2,4 +2,6 @@
 
 a type chart and calculator for a kids jrpg
 
-uses static data from [PokeAPI](https://github.com/PokeAPI/pokeapi)
+- enter the pokemon you're fighting and see dual-type calculations
+- accounts for type changes across generations, and abilities that nullify types (like levitate)
+- uses static data fetched from the lovingly maintained [PokeAPI](https://github.com/PokeAPI/pokeapi)
