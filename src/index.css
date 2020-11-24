@@ -6,6 +6,7 @@
 
 body {
   background-color: rgb(217, 229, 235);
+  margin: 1rem 0.75rem;
 }
 
 .btn-primary {
@@ -31,7 +32,7 @@ td.empty {
 }
 
 td.quarter {
-  background-color: rgb(58, 27, 25);
+  background-color: rgb(100, 24, 22);
 }
 
 td.quad {
@@ -40,7 +41,7 @@ td.quad {
 
 .table th.corner {
   background-color: rgb(226, 235, 240);
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   padding: 2px !important;
   vertical-align: middle;
 }
@@ -50,6 +51,7 @@ td.quad {
   color: rgb(255, 239, 204);
   text-shadow: 2px 2px 6px #111111;
   text-align: center;
+  font-size: 1.15rem;
 }
 
 .table-bordered td,
@@ -69,21 +71,35 @@ td.quad {
   font-weight: 700;
   color: white;
   text-shadow: 2px 2px 6px #111111;
+  vertical-align: middle;
 }
 
 .table td.header {
   text-align: center;
 }
 
+th .sprite-header {
+  width: 3rem;
+}
+
+th.pkmn-header-cell {
+  padding: 0;
+}
+
 .table-container,
 .toolbar-container {
-  max-width: 1024px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
 .toolbar-container {
-  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
   padding-bottom: 1rem;
+}
+
+.pkmn-search-container {
+  flex: 1 0 300px;
 }
 
 .btn:focus {

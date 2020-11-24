@@ -1,20 +1,15 @@
 import React from "react";
-import SelectSearch from "react-select-search";
+import Select from "react-select";
 
 const PkmnSearchbar = (props) => {
-  const pkmnOptions = props.pokeList.map((name) => {
-    return {
-      name: name.charAt(0).toUpperCase() + name.slice(1),
-      value: name,
-    };
-  });
   return (
-    <SelectSearch
-      options={pkmnOptions}
-      search
-      value={props.currentPkmnName}
-      onChange={(opt) => props.onPkmnChange(opt)}
-    />
+    <div className="pkmn-search-container">
+      <Select
+        options={props.options}
+        value={props.selectedPkmn}
+        onChange={(opt) => props.onPkmnChange(opt)}
+      />
+    </div>
   );
 };
 

@@ -10,15 +10,23 @@ import gen1 from "./data/gen1.json";
 
 import pokeList from "./data/pokeList.json";
 
+const pkmnOptions = Object.keys(pokeList).map((name) => {
+  return {
+    value: name,
+    label:
+      name.charAt(0).toUpperCase() +
+      name.slice(1) +
+      ` (${pokeList[name].types.join("/")})`,
+  };
+});
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentTypeset: gen6,
       currentGen: 6,
-      currentPkmn: pokeList["gyarados"],
-      currentPkmnName: "gyarados",
-      pokeList: Object.keys(pokeList),
+      selectedPkmn: pkmnOptions[0],
     };
   }
 
@@ -26,10 +34,9 @@ class App extends React.Component {
     this.setState({ currentTypeset: newTypeset, currentGen: newGen });
   };
 
-  handlePkmnChange = (newPkmnName) => {
+  handlePkmnChange = (newPkmn) => {
     this.setState({
-      currentPkmn: pokeList[newPkmnName],
-      currentPkmnName: newPkmnName,
+      selectedPkmn: newPkmn,
     });
   };
 
@@ -46,8 +53,8 @@ class App extends React.Component {
             onGenChange={this.handleGenChange}
           />
           <PkmnSearchbar
-            pokeList={this.state.pokeList}
-            currentPkmnName={this.state.currentPkmnName}
+            options={pkmnOptions}
+            selectedPkmn={this.state.selectedPkmn}
             onPkmnChange={this.handlePkmnChange}
           />
         </div>
@@ -55,7 +62,7 @@ class App extends React.Component {
           <TypeTable
             currentTypeset={this.state.currentTypeset}
             currentGen={this.state.currentGen}
-            currentPkmn={this.state.currentPkmn}
+            selectedPkmn={pokeList[this.state.selectedPkmn.value]}
           />
         </div>
       </>
