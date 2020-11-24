@@ -2,6 +2,7 @@ import TypeTable from "./components/TypeTable";
 import GenSelector from "./components/GenSelector";
 import PkmnSearchbar from "./components/PkmnSearchbar";
 import React from "react";
+import { FaGithub } from "react-icons/fa";
 import "./App.css";
 
 import gen6 from "./data/gen6.json";
@@ -72,6 +73,16 @@ class App extends React.Component {
             currentGen={this.state.currentGen}
             selectedPkmn={pokeList[this.state.selectedPkmn.value]}
           />
+        </div>
+        <div className="footer">
+          <a
+            href="https://github.com/vphoebe/strongly-typed"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaGithub />
+            &nbsp;strongly-typed, by vphoebe
+          </a>
         </div>
       </>
     );

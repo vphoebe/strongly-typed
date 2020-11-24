@@ -9,6 +9,14 @@ body {
   margin: 1rem 0.75rem;
 }
 
+a {
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .btn-primary {
   text-shadow: 2px 2px 6px #111111;
   background-color: #6890f0;
@@ -87,7 +95,8 @@ th.pkmn-header-cell {
 }
 
 .table-container,
-.toolbar-container {
+.toolbar-container,
+.footer {
   max-width: 1440px;
   margin: 0 auto;
 }
