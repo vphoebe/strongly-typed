@@ -7,7 +7,11 @@ const SelectedPkmnCell = (props) => {
   const halfTypes = props.type.half_damage_to;
   const noneTypes = props.type.no_damage_to;
 
-  const defenseTypes = props.selectedPkmn.types;
+  const defenseTypes =
+    props.selectedPkmn.oldTypes &&
+    props.currentGen < props.selectedPkmn.typeGenChange
+      ? props.selectedPkmn.oldTypes
+      : props.selectedPkmn.types;
 
   let attackValue1 = 1;
   let attackValue2 = 1;
