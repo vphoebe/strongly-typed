@@ -10,13 +10,21 @@ import gen1 from "./data/gen1.json";
 
 import pokeList from "./data/pokeList.json";
 
+const capitalizeStr = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+const addOldTypes = (name) => {
+  if (pokeList[name].oldTypes) return `[${pokeList[name].oldTypes.join("/")}]`;
+  return "";
+};
+
 const pkmnOptions = Object.keys(pokeList).map((name) => {
   return {
     value: name,
-    label:
-      name.charAt(0).toUpperCase() +
-      name.slice(1) +
-      ` (${pokeList[name].types.join("/")})`,
+    label: `${capitalizeStr(name)} (${pokeList[name].types.join(
+      "/"
+    )}) ${addOldTypes(name)}`,
   };
 });
 
